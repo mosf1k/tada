@@ -4,8 +4,10 @@ from django.contrib.auth.forms import UserCreationForm, authenticate
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.views import login
+from django.views.decorators.http import require_http_methods
 
 
+@require_http_methods(['GET', 'POST'])
 def register_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

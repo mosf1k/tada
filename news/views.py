@@ -6,11 +6,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template import RequestContext
 import math
 from django.conf import settings
+from django.views.decorators.http import require_GET
 
 
 ITEMS_ON_PAGE = getattr(settings, 'ITEMS_ON_PAGE', 5)
 
 
+@require_GET
 def articles(request, page):
     articles_count = Article.objects.filter(is_active=True).count()
     current_page = int(page)
@@ -27,6 +29,7 @@ def articles(request, page):
     )
 
 
+@require_GET
 def article(request, id):
     try:
         cur_article = Article.objects.filter(is_active=True).get(id=id)
@@ -35,5 +38,6 @@ def article(request, id):
     return render_to_response('news/article.html', {'article': cur_article}, context_instance=RequestContext(request))
 
 
+@require_GET
 def about(request):
     return render_to_response('about/about.html', {}, context_instance=RequestContext(request))

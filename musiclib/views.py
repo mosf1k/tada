@@ -4,29 +4,22 @@ from django.template import RequestContext
 from models import Song, Artist, Album
 from news.models import Article
 from mentions.models import ArtistInfoSource, AlbumInfoSource, SongInfoSource
-from django.db import connection
 from django.conf import settings
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.http import require_GET
 import math
+import helpers
 
 
 ITEMS_ON_PAGE = getattr(settings, 'ITEMS_ON_PAGE', 5)
 
 
-def _get_available_letters(field_name, db_table):
-    qn = connection.ops.quote_name
-    sql = "SELECT DISTINCT UPPER(SUBSTR(%s, 1, 1)) as letter FROM %s" % (qn(field_name), qn(db_table))
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    rows = cursor.fetchall() or ()
-    return [row[0] for row in sorted(rows)]
-
-
+@require_GET
 def artists(request, page, first_letter=None):
     paging_path = '/artists/'
     current_page = int(page)
-    letters = _get_available_letters('name', Artist._meta.db_table)
+    letters = helpers.get_available_letters('name', Artist._meta.db_table)
     filter_query = {}
     if not first_letter and letters:
         first_letter = letters[0]
@@ -44,6 +37,7 @@ def artists(request, page, first_letter=None):
     )
 
 
+@require_GET
 def artist(request, id):
     try:
         cur_artist = Artist.objects.get(id=id)
@@ -59,6 +53,7 @@ def artist(request, id):
     )
 
 
+@require_GET
 def album(request, id):
     try:
         cur_album = Album.objects.get(id=id)
@@ -76,6 +71,7 @@ def album(request, id):
     )
 
 
+@require_GET
 def song(request, id):
     try:
         cur_song = Song.objects.get(id=id)

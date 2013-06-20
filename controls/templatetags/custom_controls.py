@@ -2,7 +2,7 @@
 from django import template
 from controls.templatetags import MENU_LIST, PAGING_COUNT
 from django.conf import settings
-from mentions.views import get_comment_model, get_like_model
+from mentions.helpers import get_comment_model, get_like_model
 from mentions.models import InfoSource, Like
 
 
