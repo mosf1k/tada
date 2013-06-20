@@ -5,7 +5,7 @@ from musiclib.models import Artist, Album, Song, Tag
 
 class ArticlePhoto(models.Model):
     title = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='article_photos', verbose_name='Изображения к новости')
+    image = models.ImageField(upload_to='article_photos', verbose_name=u'Изображения к новости')
 
     def __unicode__(self):
         return self.title

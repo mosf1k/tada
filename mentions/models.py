@@ -75,11 +75,11 @@ class InfoSource(models.Model):
     TYPE_CHOICES = (
         (LAST_FM, 'Last.fm'),
         (FACEBOOK, 'facebook'),
-        (VK, 'ВКонтакте'),
+        (VK, u'ВКонтакте'),
         (TWITTER, 'Twitter'),
         (GOOGLE_PLUS, 'Google+'),
         (WIKIPEDIA, 'Wikipedia'),
-        (OTHER, 'Другое'),
+        (OTHER, u'Другое'),
     )
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=5, choices=TYPE_CHOICES, default=OTHER)
