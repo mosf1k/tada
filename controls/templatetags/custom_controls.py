@@ -128,6 +128,4 @@ def list_items(items, url_format):
 
 @register.inclusion_tag('controls/list_items.html')
 def list_likes(likes, url_format):
-    for like in likes:
-        print like.likes_value
     return {'items': likes, 'url_format': url_format}

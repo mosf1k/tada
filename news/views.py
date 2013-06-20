@@ -32,7 +32,6 @@ def article(request, id):
         cur_article = Article.objects.filter(is_active=True).get(id=id)
     except ObjectDoesNotExist:
         raise Http404()
-    print cur_article.artists_mentioned.all()
     return render_to_response('news/article.html', {'article': cur_article}, context_instance=RequestContext(request))
 
 
