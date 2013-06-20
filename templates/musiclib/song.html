@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load custom_controls %}
+
+{% block title %}{{ song.title }}{% endblock %}
+
+{% block nav %}{% show_menu 'artists' %}{% endblock %}
+
+{% block content %}
+    <article>
+        <h1>Композиция: {{ song.title }} {% if song.duration %}(Длительность: {{ song.duration }}){% endif %}</h1>
+        {% if song.artist %}
+            <h3>Исполнитель:</h3>
+            <p><a href="/artist/{{ song.artist.id }}">{{ song.artist.name }}</a></p>
+        {% endif %}
+        {% if song.lyrics %}
+            <h3>Текст:</h3>
+            <p class="text">
+                {{ song.lyrics }}
+            </p>
+        {% endif %}
+        {% include "controls/links.html" %}
+        {% include "controls/albums_list.html" %}
+        {% include "controls/related_news.html" %}
+    </article>
+    {% if user.is_authenticated %}
+        {% liker 'song' song.id %}
+        {% commenter 'song' song.id %}
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {% if user.is_authenticated %}
+        <script src="{% static "js/initLikers.js" %}" language="javascript" type="text/javascript"></script>
+        <script src="{% static "js/initComments.js" %}" language="javascript" type="text/javascript"></script>
+    {% endif %}
+{% endblock %}

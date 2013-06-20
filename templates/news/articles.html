@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load custom_controls %}
+
+{% block nav %}{% show_menu 'news' %}{% endblock %}
+
+{% block content %}
+    {% if articles %}
+        {% for article in articles %}
+            <article>
+                <h2><a href="/article/{{ article.id }}">{{ article.title }}</a></h2>
+                <p class="date">{{ article.publication_date|date:'Y-m-d H:i' }}</p>
+                {% tags 'Теги' article.tags.all '/tag/' %}
+                {% tags 'Исполнители' article.artists_mentioned.all '/artist/' %}
+                {% tags 'Альбомы' article.albums_mentioned.all '/album/' %}
+                {% tags 'Композиции' article.songs_mentioned.all '/song/' %}
+            </article>
+        {% endfor %}
+    {% else %}
+        <p class="empty-response-message">Новостей нет</p>
+    {% endif %}
+    {% paging '/' total_pages page %}
+{% endblock %}

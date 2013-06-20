@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load custom_controls %}
+{% block title %}{{ tag.name }}{% endblock %}
+{% block nav %}{% show_menu 'ratings' %}{% endblock %}
+{% block content %}
+    {% if artists %}
+        <article>
+            <h2><a href="/artists/rating/">По исполнителям</a></h2>
+            {% list_likes artists "/artist/" %}
+        </article>
+    {% endif %}
+    {% if albums %}
+        <article>
+            <h2><a href="/albums/rating/">По альбомам</a></h2>
+            {% list_likes albums "/album/" %}
+        </article>
+    {% endif %}
+    {% if songs %}
+        <article>
+            <h2><a href="/songs/rating/">По композициям</a></h2>
+            {% list_likes songs "/song/" %}
+        </article>
+    {% endif %}
+    {% if articles %}
+        <article>
+            <h2><a href="/articles/rating/">По новостям</a></h2>
+            {% list_likes articles "/article/" %}
+        </article>
+    {% endif %}
+
+    {% if empty_response %}<p class="empty-response-message">Пока нигде не ставили <i class="icon-thumbs-up"></i> или <i class="icon-thumbs-down"> эта страница будет пуста</i></p>{% endif %}
+
+    {% if page %}{% paging paging_path total_pages page %}{% endif %}
+{% endblock %}

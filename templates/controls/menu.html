@@ -1,0 +1,7 @@
+<nav>
+    <ul>
+        {% for id, name, href in links %}
+            <li><a class="{% ifequal id current %}active{% endifequal %}" href="{{ href }}">{{ name }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>

@@ -1,0 +1,277 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+	font-weight: normal;
+    width: 80%;
+    margin: 10px auto;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+p{
+    line-height: 16px;
+}
+/* Modern clearfix */
+.cf:before,
+.cf:after {
+	content:"";
+	display:table;
+}
+.cf:after {
+	clear:both;
+}
+/* For IE 6/7 (trigger hasLayout) */
+.cf {
+	zoom:1;
+}
+
+section h1{
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 20px;
+}
+
+/*links*/
+a{
+    text-decoration: none;
+    color: #888;
+}
+a:hover{
+    text-decoration: underline;
+    color: #222;
+}
+a.active{
+    text-decoration: none;
+}
+
+/*navigation*/
+nav{
+    display: block;
+    width: 100%;
+    height: 50px;
+    margin: 30px 20px 5px 0;
+}
+nav ul li{
+    list-style:none;
+    float: left;
+    padding: 10px 20px 10px 0;
+}
+nav a{
+
+    font-size: 22px;
+}
+nav a.active{
+    color: #111;
+}
+
+/*paging*/
+.paging-wrapper ul{
+    margin: 10px 0;
+}
+.paging-wrapper li a, .paging-wrapper li .current-page{
+    padding: 2px;
+    border: 1px solid transparent;
+    display: inline-block;
+}
+.paging-wrapper li{
+    list-style: none;
+    float: left;
+    margin-right: 15px;
+}
+.paging-wrapper span.current-page{
+    border: 1px solid #222;
+}
+
+/*articles*/
+article{
+    padding: 10px 0;
+}
+article h2{
+    padding: 10px 0 3px;
+}
+article h2 a{
+    color: #687d8a;
+    font-size: 18px;
+}
+article p.date{
+    font-size: 10px;
+    color: #7e6d6d;
+    margin: 0 0 5px;
+}
+article .tags{
+    margin: 10px 0 0;
+}
+article ul li {
+    line-height: 20px;
+}
+/*tags*/
+.tag{
+    display: inline-block;
+    background-color: #a1a1a1;
+    border: 1px solid #666;
+    color: #eaebff;
+    padding: 2px;
+    border-radius: 5px;
+}
+a.tag:hover{
+    text-decoration: none;
+}
+
+/*forms*/
+form label {
+    display: block;
+    margin: 0 5px 10px 0;
+}
+form input[type="submit"]{
+    margin: 20px 0 0;
+    border: 1px solid #666;
+}
+form input[type="submit"]:hover{
+    background-color: #666;
+    color: #fff;
+}
+
+/*user-bar*/
+.user-bar{
+    position: absolute;
+    top: 10px;
+    right: 10%;
+}
+.user-bar a{
+    text-decoration: underline;
+}
+
+/*branding*/
+.branding{
+    position: absolute;
+    top: 10px;
+}
+.copyright{
+    font-size: 12px;
+    margin-top: 40px;
+}
+
+/*comments*/
+.comments{
+    padding: 30px 0 0;
+    border-top: 1px solid #666;
+    margin: 20px 0 0;
+}
+.comments .comment{
+    margin: 20px 0;
+}
+.comments .comment-top{
+    margin: 0 0 10px;
+}
+.comments .comment-top .date{
+    color: #7e6d6d;
+    font-size: 10px;
+}
+.comments .comments-form{
+    position: relative;
+}
+.comments .comment-text{
+    width: 98%;
+}
+
+/*validation*/
+.validation-error{
+    color: red;
+    font-size: 12px;
+}
+
+/*artist*/
+article p.text{
+    margin: 10px 0;
+}
+article h3{
+    text-decoration: underline;
+    color: #777;
+    margin: 10px 5px;
+}
+article .related-links i{
+    margin-right: 5px;
+}
+.album{
+    display: inline-block;
+    float: left;
+    margin-right: 100px;
+}
+.album .cover{
+    height: 150px;
+}
+.album img{
+    height:150px;
+    vertical-align: middle;
+}
+
+/*404*/
+.error404{
+    height: 404px;
+}
+.error404 .message-container{
+    width: 50%;
+    height: 100%;
+    float: left;
+    font-size: 20px;
+}
+.error404 .message-container div{
+    margin: 180px 20px 0 0;
+    text-align:right;
+}
+.error404 .status-container{
+    width: 48%;
+    border-left: 1px solid #222;
+    height: 100%;
+    float: left;
+}
+.error404 .status-container span{
+    font-size: 60px;
+    line-height: 400px;
+    margin-left: 20px;
+}

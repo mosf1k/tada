@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load custom_controls %}
+{% block title %}Is it tada dum bam bass or boom-bada-bam{% endblock %}
+{% block nav %}{% show_menu None %}{% endblock %}
+{% block userbar %}{% endblock %}
+
+{% block content %}
+    <div class="error404">
+        <div class="message-container">
+            <div>
+                <p>Запрошенная страница не найдена!</p>
+                <p>Лучше воспользуйтесь ссылками выше ;)</p>
+            </div>
+        </div>
+        <div class="status-container">
+            <span>404</span>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,3 @@
+{% if type and item_id %}
+    <div class="liker" item-id="{{ item_id }}" type="{{ type }}" {% if state %}state="{{ state }}"{% endif %} likes="{{ likes.0 }}" dislikes="{{ likes.1 }}"></div>
+{% endif %}

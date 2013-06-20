@@ -1,0 +1,10 @@
+{% if items %}
+    <ul>
+        {% for item in items %}
+                <li>
+                    {% if item.likes_value %}{{ item.likes_value|default:'-0-' }}{% endif %}
+                    <a href="{{ url_format }}{{ item.id }}">{{ item.title }}{{ item.name }}</a>
+                </li>
+        {% endfor %}
+    </ul>
+{% endif %}

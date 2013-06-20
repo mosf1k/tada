@@ -1,0 +1,8 @@
+{% if news %}
+    <h3>Новости:</h3>
+    <ul class="related-news">
+        {% for topic in news %}
+            <li><a href="/article/{{ topic.id }}">{{ topic.publication_date|date:'Y-m-d H:i' }} - {{ topic.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

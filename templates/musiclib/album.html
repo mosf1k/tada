@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load custom_controls %}
+
+
+{% block title %}{{ album.title }}{% endblock %}
+
+{% block nav %}{% show_menu 'artists' %}{% endblock %}
+
+{% block content %}
+    <article>
+        <h1>{% for artist in album.author.all %}{{ artist.name }} {% endfor %} - {{ album.publication_date|date:'Y-m-d' }} - {{ album.title }}</h1>
+        <div class="albums cf"><div class="album">
+            <div class="cover">
+                {% if album.cover %}
+                    <img src="{% media_url %}{{ album.cover }}" alt="{{ album.title }}" />
+                {% else %}
+                    <img src="{% static "img/no_cover.png" %}" alt="{{ album.title }}" />
+                {% endif %}
+            </div>
+        </div></div>
+        {% if songs %}
+            <h3>Композиции:</h3>
+            <ul class="">
+                {% for song in songs %}
+                    <li>{{ forloop.counter }}. <a href="/song/{{ song.id }}">{{ song.title }} - ({{ song.duration }}сек.)</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% include "controls/links.html" %}
+
+        {% tags 'Теги' album.tags.all '/tag/' %}
+
+        {% include 'controls/related_news.html' %}
+    </article>
+    {% if user.is_authenticated %}
+        {% liker 'album' album.id %}
+        {% commenter 'album' album.id %}
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "js/initPhotos.js" %}" language="javascript" type="text/javascript"></script>
+    {% if user.is_authenticated %}
+        <script src="{% static "js/initLikers.js" %}" language="javascript" type="text/javascript"></script>
+        <script src="{% static "js/initComments.js" %}" language="javascript" type="text/javascript"></script>
+    {% endif %}
+{% endblock %}

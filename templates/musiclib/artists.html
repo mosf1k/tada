@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load custom_controls %}
+
+{% block nav %}{% show_menu 'artists' %}{% endblock %}
+
+{% block content %}
+    {% if letters %}{% letters_index '/artists/' letters letter %}{% endif %}
+    {% if artists %}
+        {% for artist in artists %}
+            <article>
+                <h2><a href="/artist/{{ artist.id }}">{{ artist.name }}</a></h2>
+                {% tags 'Теги' article.tags.all '/tag/' %}
+            </article>
+        {% endfor %}
+    {% else %}
+        <p class="empty-response-message">Исполнителей нет</p>
+    {% endif %}
+    {% paging paging_path total_pages page %}
+{% endblock %}

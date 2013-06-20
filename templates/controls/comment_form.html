@@ -1,0 +1,8 @@
+<h4>Добавить комментарий</h4>
+<form action="javascript:void(0);" item_id="{{ item_id }}" type="{{ type }}">
+    <textarea class="comment-text" name="message" rows="5"></textarea>
+    <div class="validation-error" rel="text" style="display: none;">* Комментарий не может быть пустым!</div>
+    <div class="validation-error" rel="server" style="display: none;">* Произошла ошибка, попробуйте позже!</div>
+    <input type="submit" value="Добавить" />
+</form>
+<div class="loading"></div>

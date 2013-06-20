@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load custom_controls %}
+
+{% block title %}{{ artist.name }}{% endblock %}
+
+{% block nav %}{% show_menu 'artists' %}{% endblock %}
+
+{% block content %}
+    <article>
+        <h1>{{ artist.about }}</h1>
+        <h3>Информация:</h3>
+        <p class="text">
+            {{ artist.about }}
+        </p>
+
+        {% include "controls/links.html" %}
+
+        {% if artist.logo %}
+            <h3>Лого:</h3>
+            <img src="{% media_url %}{{ artist.logo }}" alt="{{ artist.logo }}" />
+        {% endif %}
+
+        {% tags 'Теги' artist.tags.all '/tag/' %}
+        {% include "controls/albums_list.html" %}
+        {% include 'controls/related_news.html' %}
+    </article>
+    {% if user.is_authenticated %}
+        {% liker 'artist' artist.id %}
+        {% commenter 'artist' artist.id %}
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "js/initPhotos.js" %}" language="javascript" type="text/javascript"></script>
+    {% if user.is_authenticated %}
+        <script src="{% static "js/initLikers.js" %}" language="javascript" type="text/javascript"></script>
+        <script src="{% static "js/initComments.js" %}" language="javascript" type="text/javascript"></script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% load custom_controls %}
+{% if image_list %}
+    <div class="images">
+        <a class="prev" href="javascript:void(0);"><i class="icon-left-open-big"></i></a>
+            {% for img in image_list %}
+                <img src="{% media_url %}{{ img.image }}" alt="{{ img.title }}" />
+            {% endfor %}
+        <a class="next" href="javascript:void(0);"><i class="icon-right-open-big"></i></a>
+    </div>
+{% endif %}

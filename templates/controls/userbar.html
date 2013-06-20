@@ -1,0 +1,7 @@
+<div class="user-bar">
+    {% if user.is_authenticated %}
+        Привет, <i class="icon-user"></i>{{ user.username }}! <a href="/accounts/logout/">Уйти</a>
+    {% else %}
+        <a href="/accounts/login/">войти</a> / <a href="/accounts/register/">зарегистрироваться</a>
+    {% endif %}
+</div>

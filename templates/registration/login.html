@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load custom_controls %}
+
+{% block nav %}{% show_menu None %}{% endblock %}
+
+{% block title %}Представтесь{% endblock %}
+
+{% block content %}
+    <h1>Представиться</h1>
+    {% if user.is_authenticated %}
+        {{ user.username }}, вы же уже представились! Хотите <a href="/accounts/logout/">уйти</a>?
+    {% else %}
+        {% if form.errors %}
+            <p class="error">Что-то пошло не так. Проверьте, пожалуйста, введёные данные!</p>
+        {% endif %}
+        <form action="." method="post">{% csrf_token %}
+            <label>Логин: {{ form.username }}</label>
+            <label>Пароль: {{ form.password }}</label>
+            <input type="submit" value="Войти" />
+            <input type="hidden" name="next" value="{{ '/'|escape }}" />
+        </form>
+    {% endif %}
+{% endblock %}

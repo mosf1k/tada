@@ -1,0 +1,10 @@
+{% if tags %}
+    <div class="tags">
+        {% if title %}
+            <span class="tags-title">{{ title }}:</span>
+        {% endif %}
+        {% for tag in tags %}
+            <a class="tag" href="{{ url }}{{ tag.id }}">{{ tag.name }}{{ tag.title }}</a>
+        {% endfor %}
+    </div>
+{% endif %}

@@ -1,0 +1,32 @@
+{% load custom_controls %}
+<div class="paging-wrapper">
+    {% if left or right %}
+        <ul class="cf">
+            {% if left %}
+                <li><a href="{{ link_prefix }}{{ page|subtract:1 }}"><i class="icon-left-open-big"></i>сюда</a></li>
+            {% endif %}
+            {% if right %}
+                <li><a href="{{ link_prefix }}{{ page|add:1 }}">туда<i class="icon-right-open-big"></i></a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+    <ul class="cf">
+        {% if pages and pages.0 != 1 %}
+            <li><a href="{{ link_prefix }}">1</a></li>
+            <li> ... </li>
+        {% endif %}
+        {% for i in pages %}
+            <li>
+            {% if i == page %}
+                <span class="current-page">{{ i }}</span>
+            {% else %}
+                <a href="{{ link_prefix }}{{ i }}">{{ i }}</a>
+            {% endif %}
+            </li>
+        {% endfor %}
+        {% if pages and pages|last != last_index %}
+            <li> ... </li>
+            <li><a href="{{ link_prefix }}{{ last_index }}">{{ last_index }}</a></li>
+        {% endif %}
+    </ul>
+</div>

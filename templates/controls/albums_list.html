@@ -1,0 +1,19 @@
+{% load staticfiles %}
+{% load custom_controls %}
+{% if albums %}
+    <div class="albums cf">
+        <h3>Альбомы:</h3>
+        {% for album in albums %}
+            <div class="album">
+                <div class="cover"><a href="/album/{{ album.id }}">
+                    {% if album.cover %}
+                        <img src="{% media_url %}{{ album.cover }}" alt="{{ album.title }}" />
+                    {% else %}
+                        <img src="{% static "img/no_cover.png" %}" alt="{{ album.title }}" />
+                    {% endif %}
+                    <span> {{ album.publication_date|date:'Y-m-d' }} - {{ album.title }}</span>
+                </a></div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

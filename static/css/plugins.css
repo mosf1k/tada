@@ -1,0 +1,85 @@
+/*liker*/
+.liker a:hover i{
+    color: #62b364;
+}
+.liker .icon-spin5{
+    display: none;
+}
+.liker.loading .icon-spin5{
+    display: inline-block;
+}
+.liker i{
+    font-size: 18px;
+    color: #bfbfbf;
+}
+.liker .current i{
+    color: #393939;
+}
+
+/*loading*/
+.loading-indicator{
+    position: absolute;
+    z-index: 1;
+    top:0;
+    right:0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(160, 160, 160, 0.29);
+}
+.loading-indicator div{
+    position: absolute;
+    top: 48%;
+    left: 48%;
+    font-size: 18px;
+}
+
+/*imageSlider*/
+.image-slider{
+    margin: 10px auto;
+    width: auto;
+    position: relative;
+    height: 300px;
+    display: inline-block;
+}
+.image-slider a{
+    font-size: 30px;
+    line-height: 300px;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+}
+.image-slider .prev{
+    left: 0;
+}
+.image-slider .next{
+    right: 0;
+}
+.image-slider img{
+    margin: 0 40px;
+    height: 100%;
+}
+
+/*letter-index*/
+.letter-index-container{
+    border: 1px #e7e7e7 dashed;
+    background-color: #f7f7f7;
+    padding: 5px;
+}
+.letter-index-container p{
+    color: #777;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+.letter-index-container li{
+    list-style: none;
+    float: left;
+    margin-right: 15px;
+}
+.letter-index-container li a, .letter-index-container li .current-letter{
+    padding: 2px;
+    border: 1px solid transparent;
+    display: inline-block;
+}
+.letter-index-container span.current-letter{
+    border: 1px solid #222;
+}

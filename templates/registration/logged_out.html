@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load custom_controls %}
+
+{% block nav %}{% show_menu None %}{% endblock %}
+
+{% block title %}До встречи!{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {{ user.username }}, что вы тут делаете <a href="/">идите домой</a>?
+    {% else %}
+        Всего доброго!
+    {% endif %}
+{% endblock %}

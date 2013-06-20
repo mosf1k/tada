@@ -1,0 +1,14 @@
+{% if letters %}
+    <div class="letter-index-container cf">
+        <p>Найти по первому символу:</p>
+        <ul>
+            {% for letter in letters %}
+                {% if letter == current_letter %}
+                    <li><span class="current-letter">{{ letter|upper }}</span></li>
+                {% else %}
+                    <li><a href="{{ link_prefix }}{{ letter }}">{{ letter|upper }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

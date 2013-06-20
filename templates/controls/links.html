@@ -1,0 +1,9 @@
+{% load custom_controls %}
+{% if links %}
+     <h3>Источники:</h3>
+     <ul class="related-links">
+        {% for link in links %}
+            <li><a href="{{ link.url }}"><i class="{% source_icon_class link.type %}"></i>{{ link.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

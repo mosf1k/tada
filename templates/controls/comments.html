@@ -1,0 +1,9 @@
+<div class="comments">
+    <h3>Комментарии:</h3>
+    <div class="comments-list">
+        {% if comments %}{% include 'controls/comments_list.html' %}{% endif %}
+    </div>
+    <div class="comments-form">
+        {% include 'controls/comment_form.html' %}
+    </div>
+</div>

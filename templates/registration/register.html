@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load custom_controls %}
+
+{% block nav %}{% show_menu None %}{% endblock %}
+
+{% block title %}Регистрация пользователя{% endblock %}
+
+{% block content %}
+    <h1>Создать пользователя</h1>
+    {% if form.errors %}
+        <p class="error">Что-то пошло не так. Проверьте, пожалуйста, введёные данные!</p>
+    {% endif %}
+    <form action="." method="post">{% csrf_token %}
+        <label>Логин: {{ form.username }}</label>
+        <label>Пароль: {{ form.password1 }}</label>
+        <label>Повторите пароль: {{ form.password2 }}</label>
+        <input type="submit" value="Создать пользователя" />
+    </form>
+{% endblock %}
