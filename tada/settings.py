@@ -176,6 +176,6 @@ ITEMS_ON_PAGE = 10
 
 
 UPLOADCARE = {
-    'pub_key': 'demopublickey',
-    'secret': 'demoprivatekey',
+    'pub_key': os.environ.get('UPLOADCARE_PUB', 'demopublickey'),
+    'secret': os.environ.get('UPLOADCARE_SECRET', 'demoprivatekey'),
 }
