@@ -2,6 +2,7 @@ Django==1.4
 PIL==1.1.7
 South==0.8.1
 argparse==1.2.1
+dj-database-url==0.2.1
 psycopg2==2.5
 python-dateutil==2.1
 pyuploadcare==1.0.2
