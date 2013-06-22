@@ -4,6 +4,7 @@ from musiclib.models import Artist, Album, Song, Tag
 
 
 class ArticlePhoto(models.Model):
+    """Represents photo connected to news Article"""
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to='article_photos', verbose_name=u'Изображения к новости')
 
@@ -12,6 +13,7 @@ class ArticlePhoto(models.Model):
 
 
 class Article(models.Model):
+    """Represents Article"""
     is_active = models.BooleanField(default=False)
     title = models.CharField(max_length=50)
     text = models.TextField()

@@ -3,6 +3,7 @@ from django.db import models
 
 
 class Tag(models.Model):
+    """Model for tags(entities association tree)"""
     name = models.CharField(max_length=30)
 
     def __unicode__(self):
@@ -10,6 +11,7 @@ class Tag(models.Model):
 
 
 class Artist(models.Model):
+    """Represents Artist entity"""
     name = models.CharField(max_length=100)
     logo = models.ImageField(upload_to='artist_logo', blank=True, null=True)
     about = models.TextField()
@@ -23,6 +25,7 @@ class Artist(models.Model):
 
 
 class Album(models.Model):
+    """Represents Album entity"""
     title = models.CharField(max_length=100)
     publication_date = models.DateField(blank=True, null=True)
     cover = models.ImageField(upload_to='album_cover', blank=True, null=True)
@@ -37,6 +40,7 @@ class Album(models.Model):
 
 
 class Song(models.Model):
+    """Represents Song entity"""
     title = models.CharField(max_length=100)
     artist = models.ForeignKey(Artist)
     albums = models.ManyToManyField(Album, blank=True, null=True)

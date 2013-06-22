@@ -7,6 +7,7 @@ from datetime import datetime
 
 
 class Comment(models.Model):
+    """Abstract base class for Comments"""
     is_censored = models.BooleanField(default=False)
     user = models.ForeignKey(User)
     message = models.TextField()
@@ -17,22 +18,27 @@ class Comment(models.Model):
 
 
 class SongComment(Comment):
+    """Represents Song Comment"""
     song = models.ForeignKey(Song)
 
 
 class AlbumComment(Comment):
+    """Represents Album Comment"""
     album = models.ForeignKey(Album)
 
 
 class ArtistComment(Comment):
+    """Represents Artist Comment"""
     artist = models.ForeignKey(Artist)
 
 
 class ArticleComment(Comment):
+    """Represents Article Comment"""
     article = models.ForeignKey(Article)
 
 
 class Like(models.Model):
+    """Abstract base class for Likes"""
     LIKE = 1
     DISLIKE = -1
     DEFAULT = 0
@@ -49,22 +55,27 @@ class Like(models.Model):
 
 
 class SongLike(Like):
+    """Represents Song Like"""
     song = models.ForeignKey(Song)
 
 
 class AlbumLike(Like):
+    """Represents Album Like"""
     album = models.ForeignKey(Album)
 
 
 class ArtistLike(Like):
+    """Represents Artist Like"""
     artist = models.ForeignKey(Artist)
 
 
 class ArticleLike(Like):
+    """Represents Article Like"""
     article = models.ForeignKey(Article)
 
 
 class InfoSource(models.Model):
+    """Abstract base class for Info links (links to sources of information: wiki, etc.)"""
     LAST_FM = 'lfm'
     FACEBOOK = 'fb'
     VK = 'vk'
@@ -93,12 +104,15 @@ class InfoSource(models.Model):
 
 
 class SongInfoSource(InfoSource):
+    """Represents information link for Song"""
     song = models.ForeignKey(Song)
 
 
 class AlbumInfoSource(InfoSource):
+    """Represents information link for Album"""
     album = models.ForeignKey(Album)
 
 
 class ArtistInfoSource(InfoSource):
+    """Represents information link for Artist"""
     artist = models.ForeignKey(Artist)
