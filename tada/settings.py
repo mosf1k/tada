@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'pyuploadcare.dj',
     'south',
     'musiclib',
     'profiles',
@@ -169,3 +170,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 
 ITEMS_ON_PAGE = 10
+
+
+UPLOADCARE = {
+    'pub_key': 'demopublickey',
+    'secret': 'demoprivatekey',
+}

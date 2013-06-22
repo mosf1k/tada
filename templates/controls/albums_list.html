@@ -7,7 +7,7 @@
             <div class="album">
                 <div class="cover"><a href="/album/{{ album.id }}">
                     {% if album.cover %}
-                        <img src="{% media_url %}{{ album.cover }}" alt="{{ album.title }}" />
+                        <img src="{{ album.cover }}-/resize/150x150/" alt="{{ album.title }}" />
                     {% else %}
                         <img src="{% static "img/no_cover.png" %}" alt="{{ album.title }}" />
                     {% endif %}

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from pyuploadcare.dj import ImageField
 
 
 class Tag(models.Model):
@@ -13,7 +14,7 @@ class Tag(models.Model):
 class Artist(models.Model):
     """Represents Artist entity"""
     name = models.CharField(max_length=100)
-    logo = models.ImageField(upload_to='artist_logo', blank=True, null=True)
+    logo = ImageField(blank=True, null=True)
     about = models.TextField()
     tags = models.ManyToManyField(Tag, blank=True, null=True)
 
@@ -28,7 +29,7 @@ class Album(models.Model):
     """Represents Album entity"""
     title = models.CharField(max_length=100)
     publication_date = models.DateField(blank=True, null=True)
-    cover = models.ImageField(upload_to='album_cover', blank=True, null=True)
+    cover = ImageField(blank=True, null=True)
     author = models.ManyToManyField(Artist)
     tags = models.ManyToManyField(Tag, blank=True, null=True)
 

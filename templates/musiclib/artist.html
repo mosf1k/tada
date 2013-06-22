@@ -18,7 +18,7 @@
 
         {% if artist.logo %}
             <h3>Лого:</h3>
-            <img src="{% media_url %}{{ artist.logo }}" alt="{{ artist.logo }}" />
+            <img src="{{ artist.logo }}" alt="{{ artist.name }}" />
         {% endif %}
 
         {% tags 'Теги' artist.tags.all '/tag/' %}

@@ -13,7 +13,7 @@
         <div class="albums cf"><div class="album">
             <div class="cover">
                 {% if album.cover %}
-                    <img src="{% media_url %}{{ album.cover }}" alt="{{ album.title }}" />
+                    <img src="{{ album.cover }}" alt="{{ album.title }}" />
                 {% else %}
                     <img src="{% static "img/no_cover.png" %}" alt="{{ album.title }}" />
                 {% endif %}

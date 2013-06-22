@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from musiclib.models import Artist, Album, Song, Tag
+from pyuploadcare.dj import ImageField
 
 
 class ArticlePhoto(models.Model):
     """Represents photo connected to news Article"""
     title = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='article_photos', verbose_name=u'Изображения к новости')
+    image = ImageField(verbose_name=u'Изображения к новости')
 
     def __unicode__(self):
         return self.title
