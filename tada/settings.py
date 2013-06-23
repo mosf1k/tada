@@ -74,7 +74,7 @@ STATIC_URL = '/static/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join('static'),
-    '/var/www/static/',
+    #'/var/www/static/',
 )
 # List of finder classes that know how to find static files in
 # various locations.
@@ -109,7 +109,6 @@ ROOT_URLCONF = 'tada.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'tada.wsgi.application'
 
-import os
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
 
 INSTALLED_APPS = (
