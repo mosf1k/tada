@@ -8,17 +8,15 @@
 
 {% block content %}
     <article>
-        <h1>{{ artist.about }}</h1>
+        <h1>{{ artist.name }}</h1>
         <h3>Информация:</h3>
-        <p class="text">
-            {{ artist.about }}
-        </p>
+        {{ artist.about|linebreaks }}
 
         {% include "controls/links.html" %}
 
         {% if artist.logo %}
             <h3>Лого:</h3>
-            <img src="{{ artist.logo }}" alt="{{ artist.name }}" />
+            <img src="{{ artist.logo }}-/resize/x400/" alt="{{ artist.name }}" />
         {% endif %}
 
         {% tags 'Теги' artist.tags.all '/tag/' %}

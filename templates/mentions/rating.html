@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load custom_controls %}
-{% block title %}{{ tag.name }}{% endblock %}
+{% block title %}{% firstof tag.name 'Рейтинги' %}{% endblock %}
 {% block nav %}{% show_menu 'ratings' %}{% endblock %}
 {% block content %}
     {% if artists %}

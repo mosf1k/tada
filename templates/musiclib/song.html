@@ -15,9 +15,7 @@
         {% endif %}
         {% if song.lyrics %}
             <h3>Текст:</h3>
-            <p class="text">
-                {{ song.lyrics }}
-            </p>
+            {{ song.lyrics|linebreaks }}
         {% endif %}
         {% include "controls/links.html" %}
         {% include "controls/albums_list.html" %}

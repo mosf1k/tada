@@ -226,7 +226,7 @@ form input[type="submit"]:hover{
 }
 
 /*artist*/
-article p.text{
+article p{
     margin: 10px 0;
 }
 article h3{

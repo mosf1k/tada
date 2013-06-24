@@ -10,9 +10,7 @@
     <article>
         <h1>{{ article.title }}</h1>
         <p class="date">{{ article.publication_date|date:'Y-m-d H:i' }}</p>
-        <p class="text">
-            {{ article.text }}
-        </p>
+        {{ article.text|linebreaks }}
         {% images article.photos.all %}
         {% tags 'Теги' article.tags.all '/tag/' %}
         {% tags 'Исполнители' article.artists_mentioned.all '/artist/' %}

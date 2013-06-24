@@ -4,6 +4,6 @@
             <i class="icon-user"></i>{{ comment.user.username }}
             <span class="date">{{ comment.publication_date|date:'Y-m-d H:i' }}</span>
         </div>
-        <p class="text">{{ comment.message }}</p>
+        {{ comment.message|linebreaks }}
     </div>
 {% endfor %}
