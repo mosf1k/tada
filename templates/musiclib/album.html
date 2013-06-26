@@ -23,7 +23,7 @@
             <h3>Композиции:</h3>
             <ul class="">
                 {% for song in songs %}
-                    <li>{{ forloop.counter }}. <a href="/song/{{ song.id }}">{{ song.title }} - ({{ song.duration }}сек.)</a></li>
+                    <li>{{ forloop.counter }}. <a href="/song/{{ song.id }}">{{ song.title }}{% if song.duration %} (Длительность: {{ song.duration }}сек.){% endif %}</a></li>
                 {% endfor %}
             </ul>
         {% endif %}
