@@ -20,11 +20,10 @@ ITEMS_ON_PAGE = getattr(settings, 'ITEMS_ON_PAGE', 5)
 
 @require_POST
 @login_required
-def liker(request, action):
+def liker(request, like_value):
     """method for ajax call to like/dislike"""
     try:
         user_id = request.user.id
-        like_value = models.Like.LIKE if action == 'like' else models.Like.DISLIKE
         type = request.POST['type']
         id = request.POST['item_id']
         likeModel = helpers.get_like_model(type)
@@ -35,15 +34,10 @@ def liker(request, action):
             user_like.save()
         else:
             likeModel.objects.create(**{'like_value': like_value, 'user_id': user_id, type + '_id': id})
-        #TODO use annotation to retrieve list of likes/dislikes
-        item_likes = likeModel.objects.filter(**{type + '_id__exact': id}).only('like_value')
-        likes = 0
-        dislikes = 0
-        for item in item_likes:
-            if item.like_value == models.Like.LIKE:
-                likes += 1
-            elif item.like_value == models.Like.DISLIKE:
-                dislikes += 1
+        item_likes = likeModel.objects.only('like_value').filter(
+            **{type + '_id__exact': id}).exclude(like_value=models.Like.DEFAULT)
+        likes = len(filter(lambda x: x.like_value == models.Like.LIKE, item_likes))
+        dislikes = len(item_likes) - likes
         result = {'success': True, 'likes': likes, 'dislikes': dislikes}
     except:
         result = {'success': False}

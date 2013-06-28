@@ -25,21 +25,11 @@ def liker(context, type, item_id):
     data = {'type': type, 'item_id': item_id}
     like_model = get_like_model(type)
     like = like_model.objects.filter(**{'user_id__exact': user_id, type + '_id__exact': item_id})
-    if like:
-        if like[0].like_value == Like.LIKE:
-            data['state'] = 'like'
-        elif like[0].like_value == Like.DISLIKE:
-            data['state'] = 'dislike'
-    else:
-        data['state'] = None
-    item_likes = like_model.objects.only('like_value').filter(**{type + '_id__exact': item_id})
-    likes = 0
-    dislikes = 0
-    for item in item_likes:
-        if item.like_value == Like.LIKE:
-            likes += 1
-        elif item.like_value == Like.DISLIKE:
-            dislikes += 1
+    data['state'] = like[0].like_value if like else None
+    item_likes = like_model.objects.only('like_value').filter(
+        **{type + '_id__exact': item_id}).exclude(like_value=Like.DEFAULT)
+    likes = len(filter(lambda x: x.like_value == Like.LIKE, item_likes))
+    dislikes = len(item_likes) - likes
     data['likes'] = (likes, dislikes)
     return data
 

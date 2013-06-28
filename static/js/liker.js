@@ -1,19 +1,21 @@
 (function($){
 	var defaults = {
 		classContainer: 'liker',
+		classLikeLink: 'like-link',
 		classLikeIcon: 'icon-thumbs-up',
+		classDisLikeLink: 'dislike-link',
 		classDisLikeIcon: 'icon-thumbs-down',
 		classCurrent: 'current',
 		classLoading: 'loading',
 		classLoadingIcon: 'icon-spin5',
 		likesDatapoint: '/like/',
 		dislikesDatapoint: '/dislike/'
-	};
+	}, like = 1, dislike = -1;
 	var methods = {
 		init : function(currentOptions) {
 			var options = $.extend({}, defaults, currentOptions);
 			return this.each(function(){
-				var $container = $(this), data = $container.data('liker'), itemId = -1, currentState = null, type = null,
+				var $container = $(this), data = $container.data('liker'), itemId = -1, currentState = 0, type = null,
 					likesCount = 0, dislikesCount = 0;
 				if (!data){
 					itemId = $container.attr('item-id');
@@ -31,11 +33,11 @@
 
 				function render(){
 					var html =
-						'<a class="like-link" href="javascript:void(0);">' +
+						'<a class="' + options.classLikeLink + '" href="javascript:void(0);">' +
 							'<i class="' + options.classLikeIcon +  '"></i>' +
 							'<span>' +(likesCount ? likesCount : '') + '</span>' +
 						'</a> / ' +
-						'<a class="dislike-link" href="javascript:void(0);">' +
+						'<a class="' + options.classDisLikeLink + '" href="javascript:void(0);">' +
 							'<i class="' + options.classDisLikeIcon +  '"></i>' +
 							'<span>' +(dislikesCount ? dislikesCount : '') + '</span>' +
 						'</a><i class="animate-spin ' + options.classLoadingIcon +  '"></i>';
@@ -46,25 +48,21 @@
 					$container.find('.like-link').on('click.liker', function(e){
 						e && e.preventDefault && e.preventDefault();
 						if ($container.hasClass(options.classLoading)) return;
-						updateState('like');
+						updateState(like);
 					});
 					$container.find('.dislike-link').on('click.liker', function(e){
 						e && e.preventDefault && e.preventDefault();
 						if ($container.hasClass(options.classLoading)) return;
-						updateState('dislike');
+						updateState(dislike);
 					});
 				}
 				function setState(){
+					$container.find('.' + options.classCurrent).removeClass(options.classCurrent);
+					$container.find('.like-link').find('span').html(likesCount ? likesCount : '');
+					$container.find('.dislike-link').find('span').html(dislikesCount ? dislikesCount : '');
 					if (currentState){
-						$container.find('.' + options.classCurrent).removeClass(options.classCurrent);
-						if (currentState == 'like'){
-							$container.find('.like-link').addClass(options.classCurrent);
-						}
-						if (currentState == 'dislike'){
-							$container.find('.dislike-link').addClass(options.classCurrent);
-						}
-						$container.find('.like-link').find('span').html(likesCount ? likesCount : '');
-						$container.find('.dislike-link').find('span').html(dislikesCount ? dislikesCount : '');
+						$container.find('.' + (currentState == like ? options.classLikeLink : options.classDisLikeLink))
+							.addClass(options.classCurrent);
 					}
 				}
 				function updateState(newState){
@@ -72,7 +70,7 @@
 						$container.addClass(options.classLoading);
 						$.when($.ajax({
 							type: 'post',
-							url: newState == 'like' ? options.likesDatapoint : options.dislikesDatapoint,
+							url: newState == like ? options.likesDatapoint : options.dislikesDatapoint,
 							data: {
 								type: type,
 								item_id: itemId

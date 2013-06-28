@@ -6,6 +6,7 @@ from news.views import article, articles, about
 from profiles.views import register_user
 from mentions.views import liker, add_comment, tag, rating
 from musiclib.views import artists, artist, album, song
+from mentions.models import Like
 
 
 admin.autodiscover()
@@ -21,8 +22,8 @@ urlpatterns = patterns(
     url(r'^(?P<page>\d+)/$', articles),
     url(r'^article/(?P<id>\d+)/$', article),
     #likes/dislikes
-    url(r'^like/$', liker, {'action': 'like'}),
-    url(r'^dislike/$', liker, {'action': 'dislike'}),
+    url(r'^like/$', liker, {'like_value': Like.LIKE}),
+    url(r'^dislike/$', liker, {'like_value': Like.DISLIKE}),
     #add comment
     url(r'^comments/add/$', add_comment),
     #artists
