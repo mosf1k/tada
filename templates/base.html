@@ -5,8 +5,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>{% block title %}tada dum bam bass{% endblock %}</title>
     <link rel="stylesheet" href="{% static "css/base.css" %}" type="text/css">
+    <!--[if lt IE 9]>
+    <script>
+      var e = ("abbr,article,aside,audio,canvas,datalist,details," +
+        "figure,footer,header,hgroup,mark,menu,meter,nav,output," +
+        "progress,section,time,video").split(',');
+      for (var i = 0; i < e.length; i++) {
+        document.createElement(e[i]);
+      }
+    </script>
+    <![endif]-->
     <link rel="stylesheet" href="{% static "css/plugins.css" %}" type="text/css">
     <link rel="stylesheet" href="{% static "ico/css/tada.css" %}" type="text/css">
     <link rel="stylesheet" href="{% static "ico/css/animation.css" %}" type="text/css">
