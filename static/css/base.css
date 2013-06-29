@@ -93,8 +93,7 @@ a.active{
 nav{
     display: block;
     width: 100%;
-    height: 50px;
-    margin: 30px 20px 5px 0;
+    margin: 35px 20px 15px 0;
 }
 nav ul li{
     list-style:none;
@@ -152,6 +151,9 @@ article .tags{
 }
 article ul li {
     line-height: 20px;
+}
+.empty-response-message{
+    margin-top: 15px;
 }
 /*tags*/
 .tag{
