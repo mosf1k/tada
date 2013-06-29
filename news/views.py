@@ -15,7 +15,7 @@ def articles(request, page):
     current_page = int(page)
     if articles_count and page > 0:
         article_list = Article.objects.filter(is_active=True).order_by('-publication_date').only(
-            'title', 'publication_date', 'tags'
+            'title', 'publication_date', 'text'
         )[(current_page - 1) * ITEMS_ON_PAGE:current_page * ITEMS_ON_PAGE]
     else:
         article_list = None
