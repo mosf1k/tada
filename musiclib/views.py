@@ -4,15 +4,12 @@ from django.template import RequestContext
 from models import Song, Artist, Album
 from news.models import Article
 from mentions.models import ArtistInfoSource, AlbumInfoSource, SongInfoSource
-from django.conf import settings
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.http import require_GET
+from musiclib import ITEMS_ON_PAGE
 import math
 import helpers
-
-
-ITEMS_ON_PAGE = getattr(settings, 'ITEMS_ON_PAGE', 5)
 
 
 @require_GET

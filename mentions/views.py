@@ -10,12 +10,9 @@ from django.db.models import Sum
 from django.http import Http404
 from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist
-from django.conf import settings
+from mentions import ITEMS_ON_PAGE
 import json
 import math
-
-
-ITEMS_ON_PAGE = getattr(settings, 'ITEMS_ON_PAGE', 5)
 
 
 @require_POST

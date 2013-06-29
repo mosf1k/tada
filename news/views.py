@@ -5,11 +5,8 @@ from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import RequestContext
 import math
-from django.conf import settings
 from django.views.decorators.http import require_GET
-
-
-ITEMS_ON_PAGE = getattr(settings, 'ITEMS_ON_PAGE', 5)
+from news import ITEMS_ON_PAGE
 
 
 @require_GET
