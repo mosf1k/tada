@@ -9,7 +9,6 @@
         {% for artist in artists %}
             <article>
                 <h2><a href="/artist/{{ artist.id }}">{{ artist.name }}</a></h2>
-                {% tags 'Теги' article.tags.all '/tag/' %}
             </article>
         {% endfor %}
     {% else %}

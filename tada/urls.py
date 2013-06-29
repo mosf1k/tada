@@ -7,6 +7,7 @@ from profiles.views import register_user
 from mentions.views import liker, add_comment, tag, rating
 from musiclib.views import artists, artist, album, song
 from mentions.models import Like
+from musiclib import OTHER_STARTSWITH
 
 
 admin.autodiscover()
@@ -30,6 +31,8 @@ urlpatterns = patterns(
     url(r'^artists/$', artists, {'page': 1}),
     url(r'^artists/(?P<first_letter>\w)/$', artists, {'page': 1}),
     url(r'^artists/(?P<first_letter>\w)/(?P<page>\d+)/$', artists),
+    url(r'^artists/other/$', artists, {'first_letter': OTHER_STARTSWITH, 'page': 1}),
+    url(r'^artists/other/(?P<page>\d+)/$', artists, {'first_letter': OTHER_STARTSWITH}),
     url(r'^artist/(?P<id>\d+)/$', artist),
     #album
     url(r'^album/(?P<id>\d+)/$', album),

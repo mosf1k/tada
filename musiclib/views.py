@@ -7,28 +7,28 @@ from mentions.models import ArtistInfoSource, AlbumInfoSource, SongInfoSource
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.http import require_GET
-from musiclib import ITEMS_ON_PAGE
+from musiclib import ITEMS_ON_PAGE, OTHER_STARTSWITH, LETTERS_LIST
 import math
-import helpers
 
 
 @require_GET
 def artists(request, page, first_letter=None):
     paging_path = '/artists/'
     current_page = int(page)
-    letters = helpers.get_available_letters('name', Artist._meta.db_table)
-    filter_query = {}
-    if not first_letter and letters:
-        first_letter = letters[0]
-    if first_letter:
-        filter_query['name__istartswith'] = first_letter
-        paging_path += first_letter + '/'
-    query_set = Artist.objects.only('name', 'tags').order_by('name').filter(**filter_query)
+    if not first_letter:
+        first_letter = LETTERS_LIST[0]
+    first_letter = first_letter.lower()
+    if first_letter == OTHER_STARTSWITH:
+        filter_query = {'name__regex': '^[^A-Za-z]'}
+    else:
+        filter_query = {'name__istartswith': first_letter}
+    paging_path += first_letter + '/'
+    query_set = Artist.objects.only('name').order_by('name').filter(**filter_query)
     total_count = query_set.count()
     artist_list = query_set[(current_page - 1) * ITEMS_ON_PAGE:current_page * ITEMS_ON_PAGE]
     return render_to_response(
         'musiclib/artists.html',
-        dict(artists=artist_list, letters=letters, letter=first_letter, paging_path=paging_path,
+        dict(artists=artist_list, letters=LETTERS_LIST, letter=first_letter, paging_path=paging_path,
              page=page, total_pages=int(math.ceil(float(total_count) / ITEMS_ON_PAGE))),
         context_instance=RequestContext(request)
     )
