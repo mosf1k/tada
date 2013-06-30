@@ -4,28 +4,28 @@
 {% block nav %}{% show_menu None %}{% endblock %}
 {% block content %}
     {% if tag %}
-        <h1><i class="icon-search"></i>: Тег "<a href="/tag/{{ tag.id }}">{{ tag.name }}</a>"</h1>
+        <h1><i class="icon-search"></i>: Тег "<a href="{% url tag-base tag.id %}">{{ tag.name }}</a>"</h1>
         {% if artists %}
             <article>
-                <h2><a href="/artists/tag/{{ tag.id }}/">Исполнители по тегу</a></h2>
+                <h2><a href="{% url artists-tag tag.id %}">Исполнители по тегу</a></h2>
                 {% list_items artists "/artist/" %}
             </article>
         {% endif %}
         {% if albums %}
             <article>
-                <h2><a href="/albums/tag/{{ tag.id }}/">Альбомы по тегу</a></h2>
+                <h2><a href="{% url albums-tag tag.id %}">Альбомы по тегу</a></h2>
                 {% list_items albums "/album/" %}
             </article>
         {% endif %}
         {% if songs %}
             <article>
-                <h2><a href="/songs/tag/{{ tag.id }}/">Композиции по тегу</a></h2>
+                <h2><a href="{% url songs-tag tag.id %}">Композиции по тегу</a></h2>
                 {% list_items songs "/song/" %}
             </article>
         {% endif %}
         {% if articles %}
             <article>
-                <h2><a href="/articles/tag/{{ tag.id }}/">Новости по тегу</a></h2>
+                <h2><a href="{% url articles-tag tag.id %}">Новости по тегу</a></h2>
                 {% list_items articles "/article/" %}
             </article>
         {% endif %}

@@ -4,7 +4,8 @@
 {% block nav %}{% show_menu 'artists' %}{% endblock %}
 
 {% block content %}
-    {% if letters %}{% letters_index '/artists/' letters letter %}{% endif %}
+    {% url artists-base as artists_url %}
+    {% if letters %}{% letters_index artists_url letters letter %}{% endif %}
     {% if artists %}
         {% for artist in artists %}
             <article>

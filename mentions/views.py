@@ -13,6 +13,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from mentions import ITEMS_ON_PAGE
 import json
 import math
+from django.core.urlresolvers import reverse
 
 
 @require_POST
@@ -82,7 +83,8 @@ def tag(request, id, type=None, page=1):
             total_count = query_set.count()
             result['total_pages'] = int(math.ceil(float(total_count)/ITEMS_ON_PAGE))
             result['page'] = page
-            result['paging_path'] = '/%ss/tag/%s/' % (type, id)
+            result['paging_path'] = reverse('%ss-tag' % type, kwargs={'id': id})
+            print result['paging_path']
         current_page = int(page)
         result[name + 's'] = query_set[(current_page - 1) * ITEMS_ON_PAGE:current_page * ITEMS_ON_PAGE]
     return render_to_response('mentions/tag.html', result, context_instance=RequestContext(request))
@@ -105,7 +107,7 @@ def rating(request, type=None, page=1):
             total_count = query_set.count()
             result['total_pages'] = int(math.ceil(float(total_count)/ITEMS_ON_PAGE))
             result['page'] = page
-            result['paging_path'] = '/%ss/rating/' % type
+            result['paging_path'] = reverse('%ss-ratings' % type)
         current_page = int(page)
         result[name + 's'] = query_set[(current_page - 1) * ITEMS_ON_PAGE:current_page * ITEMS_ON_PAGE]
         if result[name + 's']:

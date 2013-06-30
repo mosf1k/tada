@@ -1,11 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
-from django.contrib.auth.views import login, logout
 from django.contrib import admin
-from news.views import article, articles, about
-from profiles.views import register_user
-from mentions.views import liker, add_comment, tag, rating
-from musiclib.views import artists, artist, album, song
 from mentions.models import Like
 from musiclib import OTHER_STARTSWITH
 
@@ -15,51 +10,51 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     #auth
-    url(r'^accounts/login/$', login),
-    url(r'^accounts/logout/$', logout),
-    url(r'^accounts/register/$', register_user),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
+    url(r'^accounts/register/$', 'profiles.views.register_user'),
     #news
-    url(r'^$', articles, {'page': 1}),
-    url(r'^(?P<page>\d+)/$', articles),
-    url(r'^article/(?P<id>\d+)/$', article),
+    url(r'^$', 'news.views.articles', {'page': 1}),
+    url(r'^(?P<page>\d+)/$', 'news.views.articles'),
+    url(r'^article/(?P<id>\d+)/$', 'news.views.article'),
     #likes/dislikes
-    url(r'^like/$', liker, {'like_value': Like.LIKE}),
-    url(r'^dislike/$', liker, {'like_value': Like.DISLIKE}),
+    url(r'^like/$', 'mentions.views.liker', {'like_value': Like.LIKE}),
+    url(r'^dislike/$', 'mentions.views.liker', {'like_value': Like.DISLIKE}),
     #add comment
-    url(r'^comments/add/$', add_comment),
+    url(r'^comments/add/$', 'mentions.views.add_comment'),
     #artists
-    url(r'^artists/$', artists, {'page': 1}),
-    url(r'^artists/(?P<first_letter>\w)/$', artists, {'page': 1}),
-    url(r'^artists/(?P<first_letter>\w)/(?P<page>\d+)/$', artists),
-    url(r'^artists/other/$', artists, {'first_letter': OTHER_STARTSWITH, 'page': 1}),
-    url(r'^artists/other/(?P<page>\d+)/$', artists, {'first_letter': OTHER_STARTSWITH}),
-    url(r'^artist/(?P<id>\d+)/$', artist),
+    url(r'^artists/$', 'musiclib.views.artists', {'page': 1}, name='artists-base'),
+    url(r'^artists/(?P<first_letter>\w)/$', 'musiclib.views.artists', {'page': 1}),
+    url(r'^artists/(?P<first_letter>\w)/(?P<page>\d+)/$', 'musiclib.views.artists'),
+    url(r'^artists/other/$', 'musiclib.views.artists', {'first_letter': OTHER_STARTSWITH, 'page': 1}),
+    url(r'^artists/other/(?P<page>\d+)/$', 'musiclib.views.artists', {'first_letter': OTHER_STARTSWITH}),
+    url(r'^artist/(?P<id>\d+)/$', 'musiclib.views.artist'),
     #album
-    url(r'^album/(?P<id>\d+)/$', album),
+    url(r'^album/(?P<id>\d+)/$', 'musiclib.views.album'),
     #song
-    url(r'^song/(?P<id>\d+)/$', song),
+    url(r'^song/(?P<id>\d+)/$', 'musiclib.views.song'),
     #tags
-    url(r'^tag/(?P<id>\d+)/$', tag),
-    url(r'^artists/tag/(?P<id>\d+)/$', tag, {'type': 'artist', 'page': 1}),
-    url(r'^artists/tag/(?P<id>\d+)/(?P<page>\d+)/$', tag, {'type': 'artist'}),
-    url(r'^albums/tag/(?P<id>\d+)/$', tag, {'type': 'album', 'page': 1}),
-    url(r'^albums/tag/(?P<id>\d+)/(?P<page>\d+)/$', tag, {'type': 'album'}),
-    url(r'^songs/tag/(?P<id>\d+)/$', tag, {'type': 'song', 'page': 1}),
-    url(r'^songs/tag/(?P<id>\d+)/(?P<page>\d+)/$', tag, {'type': 'song'}),
-    url(r'^articles/tag/(?P<id>\d+)/$', tag, {'type': 'article', 'page': 1}),
-    url(r'^articles/tag/(?P<id>\d+)/(?P<page>\d+)/$', tag, {'type': 'article'}),
+    url(r'^tag/(?P<id>\d+)/$', 'mentions.views.tag', name='tag-base'),
+    url(r'^artists/tag/(?P<id>\d+)/$', 'mentions.views.tag', {'type': 'artist', 'page': 1}, name='artists-tag'),
+    url(r'^artists/tag/(?P<id>\d+)/(?P<page>\d+)/$', 'mentions.views.tag', {'type': 'artist'}),
+    url(r'^albums/tag/(?P<id>\d+)/$', 'mentions.views.tag', {'type': 'album', 'page': 1}, name='albums-tag'),
+    url(r'^albums/tag/(?P<id>\d+)/(?P<page>\d+)/$', 'mentions.views.tag', {'type': 'album'}),
+    url(r'^songs/tag/(?P<id>\d+)/$', 'mentions.views.tag', {'type': 'song', 'page': 1}, name='songs-tag'),
+    url(r'^songs/tag/(?P<id>\d+)/(?P<page>\d+)/$', 'mentions.views.tag', {'type': 'song'}),
+    url(r'^articles/tag/(?P<id>\d+)/$', 'mentions.views.tag', {'type': 'article', 'page': 1}, name='articles-tag'),
+    url(r'^articles/tag/(?P<id>\d+)/(?P<page>\d+)/$', 'mentions.views.tag', {'type': 'article'}),
     #rating
-    url(r'^rating/', rating),
-    url(r'^artists/rating/$', rating, {'type': 'artist', 'page': 1}),
-    url(r'^artists/rating/(?P<page>\d+)/$', rating, {'type': 'artist'}),
-    url(r'^albums/rating/$', rating, {'type': 'album', 'page': 1}),
-    url(r'^albums/rating/(?P<page>\d+)/$', rating, {'type': 'album'}),
-    url(r'^songs/rating/$', rating, {'type': 'song', 'page': 1}),
-    url(r'^songs/rating/(?P<page>\d+)/$', rating, {'type': 'song'}),
-    url(r'^articles/rating/$', rating, {'type': 'article', 'page': 1}),
-    url(r'^articles/rating/(?P<page>\d+)/$', rating, {'type': 'article'}),
+    url(r'^rating/', 'mentions.views.rating', name='ratings-main'),
+    url(r'^artists/rating/$', 'mentions.views.rating', {'type': 'artist', 'page': 1}, name='artists-ratings'),
+    url(r'^artists/rating/(?P<page>\d+)/$', 'mentions.views.rating', {'type': 'artist'}),
+    url(r'^albums/rating/$', 'mentions.views.rating', {'type': 'album', 'page': 1}, name='albums-ratings'),
+    url(r'^albums/rating/(?P<page>\d+)/$', 'mentions.views.rating', {'type': 'album'}),
+    url(r'^songs/rating/$', 'mentions.views.rating', {'type': 'song', 'page': 1}, name='songs-ratings'),
+    url(r'^songs/rating/(?P<page>\d+)/$', 'mentions.views.rating', {'type': 'song'}),
+    url(r'^articles/rating/$', 'mentions.views.rating', {'type': 'article', 'page': 1}, name='articles-ratings'),
+    url(r'^articles/rating/(?P<page>\d+)/$', 'mentions.views.rating', {'type': 'article'}),
     #about
-    url(r'^about/$', about),
+    url(r'^about/$', 'news.views.about'),
     #admin && admindocs
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),

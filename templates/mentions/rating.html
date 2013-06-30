@@ -5,25 +5,25 @@
 {% block content %}
     {% if artists %}
         <article>
-            <h2><a href="/artists/rating/">По исполнителям</a></h2>
+            <h2><a href="{% url artists-ratings %}">По исполнителям</a></h2>
             {% list_likes artists "/artist/" %}
         </article>
     {% endif %}
     {% if albums %}
         <article>
-            <h2><a href="/albums/rating/">По альбомам</a></h2>
+            <h2><a href="{% url albums-ratings %}">По альбомам</a></h2>
             {% list_likes albums "/album/" %}
         </article>
     {% endif %}
     {% if songs %}
         <article>
-            <h2><a href="/songs/rating/">По композициям</a></h2>
+            <h2><a href="{% url songs-ratings %}">По композициям</a></h2>
             {% list_likes songs "/song/" %}
         </article>
     {% endif %}
     {% if articles %}
         <article>
-            <h2><a href="/articles/rating/">По новостям</a></h2>
+            <h2><a href="{% url articles-ratings %}">По новостям</a></h2>
             {% list_likes articles "/article/" %}
         </article>
     {% endif %}

@@ -1,7 +1,7 @@
 <div class="user-bar">
     {% if user.is_authenticated %}
-        Привет, <i class="icon-user"></i>{{ user.username }}! <a href="/accounts/logout/">Уйти</a>
+        Привет, <i class="icon-user"></i>{{ user.username }}! <a href="{% url django.contrib.auth.views.logout %}">Уйти</a>
     {% else %}
-        <a href="/accounts/login/">войти</a> / <a href="/accounts/register/">зарегистрироваться</a>
+        <a href="{% url django.contrib.auth.views.login %}">войти</a> / <a href="{% url profiles.views.register_user %}">зарегистрироваться</a>
     {% endif %}
 </div>
